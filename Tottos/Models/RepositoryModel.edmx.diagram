@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="58951e92091545ec83c30e8a7733a8c3" Name="Diagram1">
+        <EntityTypeShape EntityType="repositoryModel.formulaiorolpermiso" Width="1.5" PointX="4" PointY="4.75" />
+        <EntityTypeShape EntityType="repositoryModel.formulario" Width="1.5" PointX="9.125" PointY="5.5" />
+        <EntityTypeShape EntityType="repositoryModel.menu" Width="1.5" PointX="6.5" PointY="9.125" />
+        <EntityTypeShape EntityType="repositoryModel.permiso" Width="1.5" PointX="4.25" PointY="0.5" />
+        <AssociationConnector Association="repositoryModel.fk_formulario" />
+        <AssociationConnector Association="repositoryModel.fk_permiso" />
+        <AssociationConnector Association="repositoryModel.fk_menu" />
+        <EntityTypeShape EntityType="repositoryModel.rol" Width="1.5" PointX="9.5" PointY="2.75" />
+        <EntityTypeShape EntityType="repositoryModel.usuario" Width="1.5" PointX="14.875" PointY="7.125" />
+        <AssociationConnector Association="repositoryModel.fk_rolpermiso" />
+        <EntityTypeShape EntityType="repositoryModel.usuariorol" Width="1.5" PointX="12" PointY="6.5" />
+        <AssociationConnector Association="repositoryModel.fk_rol" />
+        <AssociationConnector Association="repositoryModel.fk_usuario" />
+        <EntityTypeShape EntityType="repositoryModel.local" Width="1.5" PointX="17" PointY="0.625" />
+        <EntityTypeShape EntityType="repositoryModel.cuadre" Width="1.5" PointX="17.125" PointY="3.5" />
+        <AssociationConnector Association="repositoryModel.fk_local_cuadre" />
+        <AssociationConnector Association="repositoryModel.fk_usuario_cuadre" />
+        <EntityTypeShape EntityType="repositoryModel.cuadrecaja" Width="1.5" PointX="19.375" PointY="10.75" />
+        <EntityTypeShape EntityType="repositoryModel.cuadrepasajeotros" Width="1.5" PointX="19.375" PointY="3.75" />
+        <EntityTypeShape EntityType="repositoryModel.cuadreticket" Width="1.5" PointX="19.375" PointY="1" />
+        <EntityTypeShape EntityType="repositoryModel.item" Width="1.5" PointX="20.125" PointY="7.125" />
+        <AssociationConnector Association="repositoryModel.fk_cuadrecaja_cuadre" />
+        <AssociationConnector Association="repositoryModel.fk_cuadrepasajeros_cuadre" />
+        <AssociationConnector Association="repositoryModel.fk_cuadreticket_cuadre" />
+        <EntityTypeShape EntityType="repositoryModel.cuadreinventario" Width="1.5" PointX="22.375" PointY="4.625" />
+        <AssociationConnector Association="repositoryModel.fk_cuadreinventario_cuadre" />
+        <AssociationConnector Association="repositoryModel.fk_cuadreinventario_item" />
+        <EntityTypeShape EntityType="repositoryModel.asistencia" Width="1.5" PointX="17.125" PointY="11.125" />
+        <EntityTypeShape EntityType="repositoryModel.remuneraciones" Width="1.5" PointX="17.125" PointY="7.75" />
+        <AssociationConnector Association="repositoryModel.fk_asistencia_usuario" />
+        <AssociationConnector Association="repositoryModel.fk_remuneracion_usuario" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

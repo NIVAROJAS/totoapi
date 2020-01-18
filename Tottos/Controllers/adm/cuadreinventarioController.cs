@@ -49,8 +49,8 @@ namespace Tottos.Controllers.adm
                                  (select iditem, saldo from cuadreinventario  c
                                  inner join  cuadre b on c.idcuadre = b.id 
 								 inner join cuadre d on b.local = d.local and d.id = @id
-                                 where b.fecha = (
-											select max(fecha)  from cuadre a where  a.local = d.local and a.fecha < d.fecha 
+                                 where b.id = (
+											select max(id)  from cuadre a where  a.local = d.local and a.fecha <= d.fecha and a.id <> @id
                                         )
                                 ) ant on item.id = ant.iditem
                                 where not exists (select * from cuadreinventario where item.id = cuadreinventario.iditem and cuadreinventario.idcuadre = @id)

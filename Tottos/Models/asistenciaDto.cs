@@ -13,6 +13,7 @@ namespace Tottos.Models.Dto
 
         public Nullable<System.DateTime> fechaSalida { get; set; }
 
+        public string nombre { get; set; }
         public string observacion_ { get; set; }
 
         public usuarioDto usuario { get; set; }
@@ -26,7 +27,7 @@ namespace Tottos.Models.Dto
                 fechaIngreso = model.fechaIngreso, 
                 fechaSalida = model.fechaSalida, 
                 observacion_ = model.observacion_, 
-                usuario = usuarioDto.FromModel(model.usuario), 
+                usuario = model.usuario != null? usuarioDto.FromModel(model.usuario) : null, 
             }; 
         }
 

@@ -21,6 +21,8 @@ namespace Tottos.Models.Dto
 
         public usuarioDto usuario { get; set; }
 
+        public string nombre { get; set; }
+
         public static remuneracionesDto FromModel(remuneraciones model)
         {
             return new remuneracionesDto()

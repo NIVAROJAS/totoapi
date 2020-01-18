@@ -46,7 +46,7 @@ namespace Tottos.Controllers.adm
                 length = total;
             }
 
-            var s = db.cuadre.OrderBy(x => x.id).Skip(start).Take(length).OrderByDescending(o => o.fecha).ToList();
+            var s = db.cuadre.OrderByDescending(o => o.fecha).Skip(start).Take(length).ToList();
 
             var result = new ResponceDto<cuadreDto>();
             result.draw = draw;
@@ -102,7 +102,7 @@ namespace Tottos.Controllers.adm
             }
 
             if (cuadreExists(cuadre.fecha, cuadre.local)) {
-                return Content(HttpStatusCode.Conflict, new { mensaje = "Ya existe un registro de cierre para la fecha especificada, verifique." });
+                return Content(HttpStatusCode.Conflict, new { mensaje = "Ya existe un registro de cierre con fecha posterior a la indicada, verifique." });
             }
 
             if (cuadreExists(cuadre.local, cuadre.estado))
@@ -148,7 +148,7 @@ namespace Tottos.Controllers.adm
 
         private bool cuadreExists(DateTime fecha, int local)
         {
-            return db.cuadre.Count(e => e.fecha == fecha && e.local == local) > 0;
+            return db.cuadre.Count(e => e.fecha > fecha && e.local == local) > 0;
         }
         
         private bool cuadreExists(int local, int estado)

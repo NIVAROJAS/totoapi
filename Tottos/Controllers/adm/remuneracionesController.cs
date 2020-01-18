@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -38,11 +39,10 @@ namespace Tottos.Controllers.adm
             return Ok(remuneracionesDto.FromModel(remuneraciones));
         }
 
-        public ResponceDto<remuneracionesDto> Getremuneraciones(int draw, int start, int length, string search)
+        public ResponceDto<remuneracionesDto> Getremuneraciones(int draw, int start, int length, int search)
         {
-            if (search == null) search = "";
-            var total = db.remuneraciones.Where(x => x.usuario.nombre.Contains(search)).Count();
-            var s = db.remuneraciones.Where(x => x.usuario.nombre.Contains(search)).OrderBy(x => x.id).Skip(start).Take(length).ToList();
+            var total = db.remuneraciones.Where(x => x.usuario.id == search).Count();
+            var s = db.remuneraciones.Where(x => x.usuario.id == search).OrderBy(i => i.id).Skip(start).Take(length).ToList();
 
             var result = new ResponceDto<remuneracionesDto>
             {
@@ -53,6 +53,37 @@ namespace Tottos.Controllers.adm
             };
 
             return result;
+        }
+
+        public ResponceDto<remuneracionesDto> GetResumenAsistencia(int draw, int start, int length, string desde, string hasta)
+        {
+
+
+            DateTime fdesde = DateTime.Now;
+            DateTime fhasta = DateTime.Now;
+
+            fdesde = DateTime.ParseExact(desde, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            fhasta = DateTime.ParseExact(hasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+            string strQuery = @"SELECT idPersonal, aniopago, mespago, dia, concepto, importe, nombre 
+                                FROM remuneraciones r
+                                inner join usuario u
+                                on r.idPersonal = u.id
+                                where dia between  @desde and @hasta
+                                order by dia";
+
+            var listaResumen = db.Database.SqlQuery<remuneracionesDto>(strQuery, new MySql.Data.MySqlClient.MySqlParameter("@desde", fdesde), new MySql.Data.MySqlClient.MySqlParameter("@hasta", fhasta)).ToList();
+
+            var result = new ResponceDto<remuneracionesDto>
+            {
+                draw = draw,
+                recordsFiltered = listaResumen.Count(),
+                recordsTotal = listaResumen.Count(),
+                data = listaResumen.Skip(start).Take(length).ToList()
+            };
+
+            return result;
+
         }
 
         // PUT: api/remuneraciones/5
